@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div>
-      <h1 className="text-xl">Hello Body</h1>
+    <div className="min-h-screen min-w-screen">
+      <h1>Tiktok time</h1>
     </div>
   );
 }

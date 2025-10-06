@@ -3,3 +3,9 @@
 html {
   font-family: "TikTok Sans", sans-serif;
 }
+
+:root{
+    --color-header: "#B8B9BD";
+    --color-red: "#FD2C54"
+    --color-gray: "#E6E6E6"
+}

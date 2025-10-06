@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 html {
-  font-family: TikTok Sans;
+  font-family: 'TikTok Sans', sans-serif;
 }
 
 :root{
@@ -40,4 +40,16 @@ html {
 
 .slider::-webkit-slider-thumb:hover{
   scale: 1.2;
+}
+.active{
+  color: white;
+}
+.active::after{
+  content: '';
+  display: flex;
+  margin-top: 10px;
+  margin-left: 10px;
+  background: white;
+  width: 40px;
+  height: 3px;
 }

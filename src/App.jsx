@@ -4,6 +4,7 @@ import heartIcon from "./assets/tiktok icons/tiktok-heart.svg";
 import commentIcon from "./assets/tiktok icons/tiktok-comments.svg";
 import favoriteIcon from "./assets/tiktok icons/tiktok-favorite.svg";
 import forwardIcon from "./assets/tiktok icons/tiktok-forward.svg";
+import verifiedIcon from "./assets/tiktok icons/tiktok-verified.svg";
 import { Plus } from "lucide-react";
 function App() {
   return (
@@ -49,6 +50,39 @@ function App() {
         <div className="flex flex-col items-center gap-2">
           <img src={forwardIcon} alt="tiktok forward icon" width={37} />
           <span className="font-bold text-white text-xl">9,782</span>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-end justify-between">
+          <div>
+            <span className="inline-flex gap-2.5">
+              <h1 className="text-3xl font-semibold text-white">
+                Onyebuchi Munachi
+              </h1>
+              <img src={verifiedIcon} alt="tiktok verified icon" width={20} />
+            </span>
+            <div className="h-12.5 max-w-[360px] overflow-y-hidden">
+              <p className="text-lg text-white">
+                My name is Munachi Onyebuchi, I'm a frontend web developer with
+                more...more years of experience in react js and tailwindCSS
+              </p>
+            </div>
+          </div>
+
+          <div className="size-14 rounded-full bg-black background"></div>
+        </div>
+        <div className="mt-2">
+          <input
+            type="range"
+            name="range"
+            id="range"
+            min={0}
+            max={100}
+            /* value={0} */
+            /* className="w-full accent-white/20 outline-0 border-0 focus:outline-none focus:border-none hover:outline-none hover:border-none" */
+            className="slider"
+          />
         </div>
       </div>
     </div>

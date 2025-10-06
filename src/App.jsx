@@ -75,6 +75,8 @@ function App() {
 
           <div className="size-14 rounded-full bg-black background"></div>
         </div>
+      </div>
+      <div>
         <div className="mt-2">
           <input
             type="range"

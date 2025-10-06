@@ -6,7 +6,10 @@ import favoriteIcon from "./assets/tiktok icons/tiktok-favorite.svg";
 import forwardIcon from "./assets/tiktok icons/tiktok-forward.svg";
 import verifiedIcon from "./assets/tiktok icons/tiktok-verified.svg";
 import { Plus } from "lucide-react";
+import { useState } from "react";
+
 function App() {
+  const [range, setRange] = useState(0);
   return (
     <div className="min-h-screen min-w-screen bg-red-400 p-4">
       <div className="flex w-full justify-between items-center">
@@ -79,8 +82,11 @@ function App() {
             id="range"
             min={0}
             max={100}
-            /* value={0} */
-            /* className="w-full accent-white/20 outline-0 border-0 focus:outline-none focus:border-none hover:outline-none hover:border-none" */
+            value={range}
+            onChange={(e) => setRange(e.target.value)}
+            style={{
+              background: `linear-gradient(to right, #ffff ${range}%, #ffffff77 ${range}%)`,
+            }}
             className="slider"
           />
         </div>

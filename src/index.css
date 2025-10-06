@@ -2,11 +2,17 @@
 @import "tailwindcss";
 
 html {
-  font-family: "TikTok Sans", sans-serif;
+  font-family: TikTok Sans;
 }
 
 :root{
     --color-header: "#B8B9BD";
     --color-red: "#FD2C54"
     --color-gray: "#E6E6E6"
+}
+
+.background{
+  background-image: url('./assets/tiktok assets/img1.jpg');
+  background-position: center top;
+  background-size: contain;
 }

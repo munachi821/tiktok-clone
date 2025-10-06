@@ -12,7 +12,7 @@ function App() {
         <div>
           <img src={liveIcon} alt="tiktok live icon" width={35} />
         </div>
-        <ul className="inline-flex text-[#B8B9BD] gap-4 font-bold pt-5">
+        <ul className="inline-flex text-[#B8B9BD] gap-4 font-bold pt-5 text-[15.933px]">
           <li className="cursor-pointer">STEM</li>
           <li className="cursor-pointer">Explore</li>
           <li className="cursor-pointer">Following</li>
@@ -26,8 +26,8 @@ function App() {
       </div>
 
       <div className="flex flex-col items-center w-fit gap-5">
-        <div className="size-16 rounded-full bg-black relative">
-          <div className="absolute size-6 rounded-full -bottom-2 left-5.5 flex items-center justify-center text-white bg-[#FD2C54]">
+        <div className="size-16 rounded-full bg-black relative background">
+          <div className="absolute size-6 rounded-full -bottom-2 left-[21px] flex items-center justify-center text-white bg-[#FD2C54]">
             <Plus size={18} />
           </div>
         </div>

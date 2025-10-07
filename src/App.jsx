@@ -59,14 +59,22 @@ function App() {
       </div>
 
       {/* Main Screen Section */}
-      <div className="min-w-full max-h-[854px] fixed left-0 overflow-y-hidden">
-        <div className="snap-y snap-mandatory overflow-y-scroll">
-          {videos.map((src, index) => (
-            <video autoplay loop key={index} ref={videoRef}>
-              <source src={src} type="video/mp4" />
-            </video>
-          ))}
-        </div>
+      {/* Main Screen Section */}
+      <div className="fixed left-0 top-0 w-full h-screen overflow-y-scroll snap-y snap-mandatory">
+        {videos.map((src, index) => (
+          <div
+            key={index}
+            className="snap-start h-screen w-full flex justify-center items-center bg-black"
+          >
+            <video
+              ref={index === 0 ? videoRef : null} // use the main ref only for the first one
+              src={src}
+              loop
+              muted
+              className="h-full w-auto object-cover"
+            />
+          </div>
+        ))}
       </div>
 
       {/* User Interaction Section */}

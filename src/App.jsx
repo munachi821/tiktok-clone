@@ -59,12 +59,11 @@ function App() {
       </div>
 
       {/* Main Screen Section */}
-      {/* Main Screen Section */}
-      <div className="fixed left-0 top-0 w-full h-screen overflow-y-scroll snap-y snap-mandatory">
+      <div className="fixed left-0 top-0 w-full max-h-[854px] overflow-y-scroll snap-y snap-mandatory mt-6">
         {videos.map((src, index) => (
           <div
             key={index}
-            className="snap-start h-screen w-full flex justify-center items-center bg-black"
+            className="snap-start h-full w-full flex justify-center items-center"
           >
             <video
               ref={index === 0 ? videoRef : null} // use the main ref only for the first one

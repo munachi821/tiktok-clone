@@ -21,7 +21,7 @@ html {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 7px;
+  height: 5px;
   outline: none;
   -webkit-transition: 0.2s;
   transition: background 0.2s linear;
@@ -31,8 +31,8 @@ html {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background: white;
   cursor: pointer;
   border-radius: 50%;

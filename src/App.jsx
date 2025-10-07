@@ -94,6 +94,15 @@ function App() {
       currentVideo.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [activeIndex]);
+
+  const formatTime = (time) => {
+    if (!time || isNaN(time)) return "00:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
   return (
     <div className="min-h-screen min-w-screen bg-black p-5">
       {/* Header */}
@@ -181,14 +190,12 @@ function App() {
             <div className="size-14 rounded-full background"></div>
           </div>
         </div>
-        <div className="flex flex-col relative">
-          <p className="text-2xl text-white font-semibold z-50 absolute text-center w-full bottom-30 whitespace-nowrap">
-            {"00 : " + currentTime.toFixed(1)}s /{" "}
-            <span className="text-[#ffffff77]">
-              {"00 : " + duration.toFixed(1)}s
-            </span>
+        <div className="flex flex-col relative group">
+          <p className="text-xl hidden group-active:block text-white font-semibold z-50 absolute text-center w-full bottom-30 whitespace-nowrap">
+            {formatTime(currentTime)} <span className="text-sm"> / </span>
+            <span className="text-[#ffffff77]">{formatTime(duration)}</span>
           </p>
-          <div className="mt-2 group">
+          <div className="mt-2">
             <input
               type="range"
               name="range"

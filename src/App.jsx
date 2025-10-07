@@ -212,7 +212,7 @@ function App() {
                 }
               }}
               style={{
-                background: `linear-gradient(to right, #ffff ${range}%, #ffffff77 ${range}%)`,
+                background: `linear-gradient(to right, #ffffffc4 ${range}%, #eeeeee65 ${range}%)`,
               }}
               className="slider"
             />

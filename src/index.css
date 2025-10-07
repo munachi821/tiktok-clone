@@ -33,14 +33,44 @@ html {
   appearance: none;
   width: 12px;
   height: 12px;
-  background: white;
+  background: #ffffffc2;
   cursor: pointer;
   border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.slider:hover::-webkit-slider-thumb,
+.slider:active::-webkit-slider-thumb {
+  opacity: 1;
 }
 
-.slider::-webkit-slider-thumb:hover{
-  scale: 1.2;
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
+
+/* To make the slider work on firefox */
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffffffc2;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.slider:hover::-moz-range-thumb,
+.slider:active::-moz-range-thumb {
+  opacity: 1;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.testing{
+  background: #eeeeee65;
+}
+
 .active{
   color: white;
 }

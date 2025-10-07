@@ -18,28 +18,82 @@ import { useEffect, useRef, useState } from "react";
 function App() {
   const [range, setRange] = useState(0);
   const videos = [video1, video2, video3];
-  const videoRef = useRef(null);
+  const videoRefs = useRef([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const video = videoRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.dataset.index);
+          if (entry.isIntersecting) setActiveIndex(index);
+        });
+      },
+      { threshold: 0.7 }
+    );
 
-    const handleLoadedMetadata = () => {
-      setDuration(video.duration);
-    };
-    const handleTimeUpdate = () => {
-      setCurrentTime(video.currentTime);
-      setRange((video.currentTime / video.duration) * 100);
-    };
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
-    video.addEventListener("timeupdate", handleTimeUpdate);
+    videoRefs.current.forEach((video, index) => {
+      if (video instanceof Element) {
+        video.dataset.index = index;
+        observer.observe(video);
+      }
+    });
+
+    // 👇 Force first video active on mount
+    if (videoRefs.current[0]) {
+      setActiveIndex(0);
+    }
 
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
+      videoRefs.current
+        .filter((video) => video instanceof Element)
+        .forEach((video) => observer.unobserve(video));
     };
   }, []);
+
+  useEffect(() => {
+    const currentVideo = videoRefs.current[activeIndex];
+    if (!currentVideo) return;
+
+    const handleLoadedMetadata = () => {
+      setDuration(currentVideo.duration);
+      setRange(0);
+      setCurrentTime(0);
+    };
+
+    const handleTimeUpdate = () => {
+      const { currentTime, duration } = currentVideo;
+      if (duration && duration > 0) {
+        setCurrentTime(currentTime);
+        setRange((currentTime / duration) * 100);
+      }
+    };
+
+    //once you scroll off the video pause it
+    videoRefs.current.forEach((video, i) => {
+      if (i !== activeIndex && video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+
+    currentVideo.addEventListener("loadedmetadata", handleLoadedMetadata);
+    currentVideo.addEventListener("timeupdate", handleTimeUpdate);
+
+    currentVideo.play().catch((err) => {
+      if (err.name !== "AbortError") {
+        console.error("Video play error", err);
+      }
+    });
+
+    return () => {
+      currentVideo.pause(); //pauses when leaving
+      currentVideo.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      currentVideo.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [activeIndex]);
   return (
     <div className="min-h-screen min-w-screen bg-black p-5">
       {/* Header */}
@@ -66,7 +120,7 @@ function App() {
             className="snap-start h-full w-full flex justify-center items-center"
           >
             <video
-              ref={index === 0 ? videoRef : null} // use the main ref only for the first one
+              ref={(el) => (videoRefs.current[index] = el)} // use the main ref only for the first one
               src={src}
               loop
               muted
@@ -127,7 +181,13 @@ function App() {
             <div className="size-14 rounded-full background"></div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col relative">
+          <p className="text-2xl text-white font-semibold z-50 absolute text-center w-full bottom-30 whitespace-nowrap">
+            {"00 : " + currentTime.toFixed(1)}s /{" "}
+            <span className="text-[#ffffff77]">
+              {"00 : " + duration.toFixed(1)}s
+            </span>
+          </p>
           <div className="mt-2 group">
             <input
               type="range"
@@ -135,17 +195,20 @@ function App() {
               id="range"
               min={0}
               max={100}
-              value={range}
-              onChange={(e) => setRange(e.target.value)}
+              value={isNaN(range) ? 0 : range}
+              onChange={(e) => {
+                const newRange = e.target.value;
+                setRange(newRange);
+                const currentVideo = videoRefs.current[activeIndex];
+                if (currentVideo && duration > 0) {
+                  currentVideo.currentTime = (newRange / 100) * duration;
+                }
+              }}
               style={{
                 background: `linear-gradient(to right, #ffff ${range}%, #ffffff77 ${range}%)`,
               }}
               className="slider"
             />
-            {/* 
-            <p className="hidden group-focus:block text-3xl">
-              {currentTime.toFixed(1)}s / {duration.toFixed(1)}s
-            </p> */}
           </div>
           <div className="flex justify-between items-center text-white">
             <div className="flex items-center flex-col">

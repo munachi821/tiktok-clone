@@ -24,15 +24,15 @@ html {
   height: 7px;
   outline: none;
   -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
+  transition: background 0.2s linear;
   border-radius: 12px;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   background: white;
   cursor: pointer;
   border-radius: 50%;

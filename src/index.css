@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 html {
-  font-family: TikTok Sans;
+  font-family: 'TikTok Sans', sans-serif;
 }
 
 :root{
@@ -21,23 +21,65 @@ html {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 7px;
+  height: 5px;
   outline: none;
   -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
+  transition: background 0.2s linear;
   border-radius: 12px;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
-  background: white;
+  width: 12px;
+  height: 12px;
+  background: #ffffffc2;
   cursor: pointer;
   border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.slider:hover::-webkit-slider-thumb,
+.slider:active::-webkit-slider-thumb {
+  opacity: 1;
 }
 
-.slider::-webkit-slider-thumb:hover{
-  scale: 1.2;
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* To make the slider work on firefox */
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffffffc2;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.slider:hover::-moz-range-thumb,
+.slider:active::-moz-range-thumb {
+  opacity: 1;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.testing{
+  background: #eeeeee65;
+}
+
+.active{
+  color: white;
+}
+.active::after{
+  content: '';
+  display: flex;
+  margin-top: 10px;
+  margin-left: 10px;
+  background: white;
+  width: 40px;
+  height: 3px;
 }
